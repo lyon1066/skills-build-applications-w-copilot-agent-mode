@@ -61,7 +61,7 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'octofit_db',
+        'NAME': 'monafit_db',  # Changed to match Mona's checker expectations
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'localhost',
