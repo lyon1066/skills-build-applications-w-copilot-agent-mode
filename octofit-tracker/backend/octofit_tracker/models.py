@@ -9,8 +9,8 @@ class User(models.Model):
 
 class Team(models.Model):
     _id = models.ObjectIdField()
-    name = models.CharField(max_length=100)
-    members = models.ArrayField(model_container=User)
+    name = models.CharField(max_length=100, unique=True)
+    members = models.ArrayReferenceField(to=User, on_delete=models.CASCADE)
 
 class Activity(models.Model):
     _id = models.ObjectIdField()
@@ -19,11 +19,13 @@ class Activity(models.Model):
     duration = models.IntegerField()
     date = models.DateTimeField()
     points = models.IntegerField(default=0)
+    activity_id = models.CharField(max_length=100, unique=True, null=True)
 
 class Leaderboard(models.Model):
     _id = models.ObjectIdField()
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
+    leaderboard_id = models.CharField(max_length=100, unique=True, null=True)
 
 class Workout(models.Model):
     _id = models.ObjectIdField()
@@ -31,3 +33,4 @@ class Workout(models.Model):
     workout_type = models.CharField(max_length=50)
     details = models.JSONField()
     date = models.DateTimeField()
+    workout_id = models.CharField(max_length=100, unique=True, null=True)
